@@ -39,6 +39,7 @@ export default function App() {
 
   // User State
   const [user, setUser] = useState({ name: '', phone: '', email: '', board: '', exam: '', subject: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Test State
   const [testConfig, setTestConfig] = useState({ timerMode: 'Countdown', confidence: 3 });
@@ -134,9 +135,33 @@ export default function App() {
   }, []);
 
   // --- PHASE 1: ONBOARDING ---
-  const handleOnboardingSubmit = (e) => {
+  const handleOnboardingSubmit = async (e) => {
     e.preventDefault();
-    setPhase('dashboard');
+    setIsSubmitting(true);
+
+    const webhookUrl = "https://script.google.com/macros/s/AKfycbwueONEh-XXNqG35KzuqU-t_Kz4aZohmJdrzI1XHvaAfN7rOsIXh4wwCUR6hHGiMwYp/exec";
+
+    try {
+      const formData = new URLSearchParams();
+      formData.append('name', user.name);
+      formData.append('phone', user.phone);
+      formData.append('email', user.email);
+      formData.append('board', user.board);
+      formData.append('exam', user.exam);
+      formData.append('subject', user.subject);
+
+      // Fire and forget using no-cors to bypass browser strictness on Google Scripts
+      await fetch(webhookUrl, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      });
+    } catch (err) {
+      console.error("Failed to sync lead data:", err);
+    } finally {
+      setIsSubmitting(false);
+      setPhase('dashboard');
+    }
   };
 
   const renderOnboarding = () => (
@@ -199,8 +224,12 @@ export default function App() {
             <p className="text-xs text-slate-400 mt-2">Select the test which you want to appear in.</p>
           </div>
 
-          <button type="submit" disabled={!user.name || !user.phone || !user.email || !user.board || !user.exam || !user.subject} className="w-full bg-teal-600 hover:bg-teal-700 text-white p-4 rounded-xl font-medium transition-all flex justify-center items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
-            Let's Start <ArrowRight size={18} />
+          <button type="submit" disabled={!user.name || !user.phone || !user.email || !user.board || !user.exam || !user.subject || isSubmitting} className="w-full bg-teal-600 hover:bg-teal-700 text-white p-4 rounded-xl font-medium transition-all flex justify-center items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+            {isSubmitting ? (
+              <><Loader2 className="animate-spin" size={18} /> Securing your test...</>
+            ) : (
+              <>Let's Start <ArrowRight size={18} /></>
+            )}
           </button>
         </form>
       </div>

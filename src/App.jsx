@@ -7,8 +7,8 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/diagnostic" element={<DiagnosticTest />} />
+        <Route path="/" element={<DiagnosticTest />} />
+        <Route path="/landing" element={<LandingPage />} />
       </Routes>
     </Router>
   );

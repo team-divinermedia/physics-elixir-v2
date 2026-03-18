@@ -34,6 +34,7 @@ Apply for Demo
 <nav>
   <div className="nav-logo">Physics <span>Elixir</span></div>
   <div className="nav-right">
+    <a href="https://test.physicselixir.com" target="_blank" rel="noreferrer" className="nav-link">Tests</a>
     <span className="nav-badge">5 Seats Left</span>
     <a href="https://wa.me/918469862440?text=Hi%2C%20I%20want%20to%20apply%20for%20a%20free%20demo%20session%20at%20Physics%20Elixir" className="btn-nav" target="_blank">Apply for Demo →</a>
   </div>

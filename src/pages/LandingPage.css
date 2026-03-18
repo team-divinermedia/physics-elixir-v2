@@ -37,6 +37,8 @@ nav{background:#fff;border-bottom:1px solid var(--border);padding:0 5%;display:f
 .nav-logo{font-family:'Inter', sans-serif;font-weight:800;font-size:20px;color:var(--navy)}
 .nav-logo span{color:var(--orange)}
 .nav-right{display:flex;align-items:center;gap:14px}
+.nav-link{font-family:'Inter', sans-serif;font-weight:600;font-size:14px;color:var(--text-mid);transition:color 0.2s;margin-right:8px}
+.nav-link:hover{color:var(--orange)}
 .nav-badge{background:var(--red-light);color:var(--red);font-size:11px;font-weight:700;padding:4px 10px;border-radius:5px}
 .btn-nav{background:var(--orange);color:#fff;border-radius:8px;padding:10px 20px;font-family:'Inter', sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px}
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
 import DiagnosticTest from './pages/DiagnosticTest';
 
 export default function App() {
@@ -8,7 +7,6 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<DiagnosticTest />} />
-        <Route path="/landing" element={<LandingPage />} />
       </Routes>
     </Router>
   );
